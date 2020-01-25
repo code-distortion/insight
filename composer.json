@@ -1,0 +1,55 @@
+{
+    "name": "code-distortion/insight",
+    "description": "Test protected and private object methods and properties as if they were public",
+    "keywords": [
+        "code distortion",
+        "testing",
+        "tdd",
+        "phpunit",
+        "unit tests",
+        "unit testing",
+        "private",
+        "protected",
+        "public",
+        "method",
+        "property",
+        "access"
+    ],
+    "homepage": "https://github.com/code-distortion/insight",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Tim Chandler",
+            "email": "tim@code-distortion.net",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.0"
+    },
+    "require-dev": {
+        "jchook/phpunit-assert-throws": "^1.0",
+        "phpstan/phpstan": "^0.9 || ^0.10 || ^0.11 || ^0.12",
+        "phpunit/phpunit": "^6.0 || ^7.0 || ^8.0",
+        "squizlabs/php_codesniffer": "^3.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "CodeDistortion\\Insight\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "CodeDistortion\\Insight\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "phpstan": "vendor/bin/phpstan analyse -c phpstan.neon --level=8 .",
+        "phpcs": "vendor/bin/phpcs ."
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
