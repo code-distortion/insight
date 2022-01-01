@@ -41,6 +41,6 @@ class SomeClassWithMagic
      */
     public function __call(string $name, array $args)
     {
-        return $args[0].$args[1];
+        return $args[0] . $args[1];
     }
 }

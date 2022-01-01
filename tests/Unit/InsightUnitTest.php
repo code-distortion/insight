@@ -13,7 +13,6 @@ use CodeDistortion\Insight\Insight;
  */
 class InsightUnitTest extends TestCase
 {
-
     /**
      * Test that Insight can be instantiated when given a closs.
      *

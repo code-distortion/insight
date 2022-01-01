@@ -95,7 +95,7 @@ abstract class SomeClassAbstract
 
 
     /**
-     * Return a the static $protectedStaticProp.
+     * Return the static $protectedStaticProp.
      *
      * @return mixed
      */
@@ -105,7 +105,7 @@ abstract class SomeClassAbstract
     }
 
     /**
-     * Return a the static $privateStaticProp.
+     * Return the static $privateStaticProp.
      *
      * @return mixed
      */
@@ -135,9 +135,9 @@ abstract class SomeClassAbstract
      * @param string $b A parameter.
      * @return string
      */
-    public function publicMethod(string $a, string $b)
+    public function publicMethod(string $a, string $b): string
     {
-        return $a.$b;
+        return $a . $b;
     }
 
     /**
@@ -147,9 +147,9 @@ abstract class SomeClassAbstract
      * @param string $b A parameter.
      * @return string
      */
-    protected function protectedMethod(string $a, string $b)
+    protected function protectedMethod(string $a, string $b): string
     {
-        return $a.$b;
+        return $a . $b;
     }
 
     /**
@@ -159,9 +159,9 @@ abstract class SomeClassAbstract
      * @param string $b A parameter.
      * @return string
      */
-    private function privateMethod(string $a, string $b)
+    private function privateMethod(string $a, string $b): string
     {
-        return $a.$b;
+        return $a . $b;
     }
 
 
@@ -173,9 +173,9 @@ abstract class SomeClassAbstract
      * @param string $b A parameter.
      * @return string
      */
-    public static function publicStaticMethod(string $a, string $b)
+    public static function publicStaticMethod(string $a, string $b): string
     {
-        return $a.$b;
+        return $a . $b;
     }
 
     /**
@@ -185,9 +185,9 @@ abstract class SomeClassAbstract
      * @param string $b A parameter.
      * @return string
      */
-    protected static function protectedStaticMethod(string $a, string $b)
+    protected static function protectedStaticMethod(string $a, string $b): string
     {
-        return $a.$b;
+        return $a . $b;
     }
 
     /**
@@ -197,8 +197,8 @@ abstract class SomeClassAbstract
      * @param string $b A parameter.
      * @return string
      */
-    private static function privateStaticMethod(string $a, string $b)
+    private static function privateStaticMethod(string $a, string $b): string
     {
-        return $a.$b;
+        return $a . $b;
     }
 }
