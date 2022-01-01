@@ -3,6 +3,7 @@
 namespace CodeDistortion\Insight;
 
 use CodeDistortion\Insight\Exceptions\InsightException;
+use phpDocumentor\Reflection\Types\Mixed_;
 use ReflectionClass;
 use ReflectionException;
 use ReflectionObject;
@@ -62,9 +63,9 @@ class Insight
     {
         $static = is_string($this->insight);
         try { // try-catch to handle the exception for phpstan
-            $reflection = ($static
+            $reflection = $static
                 ? new ReflectionClass($this->insight)
-                : new ReflectionObject($this->insight));
+                : new ReflectionObject($this->insight);
         } catch (ReflectionException $e) { // ignore because we know the class exists
             $reflection = null;
         }
@@ -80,13 +81,14 @@ class Insight
             if ($prop) {
                 if ((!$static) || ($prop->isStatic() == $static)) {
                     $prop->setAccessible(true);
-                    return $prop->getValue($this->insight);
+                    $objectInstance = is_object($this->insight) ? $this->insight : null;
+                    return $prop->getValue($objectInstance);
                 }
                 throw InsightException::propMustBeStatic($name);
             }
         }
 
-        // otherwise pass the call on to the object itself
+        // otherwise, pass the call on to the object itself
         if (!$static) {
             return $this->insight->{$name};
         }
@@ -107,9 +109,9 @@ class Insight
     {
         $static = is_string($this->insight);
         try { // try-catch to handle the exception for phpstan
-            $reflection = ($static
+            $reflection = $static
                 ? new ReflectionClass($this->insight)
-                : new ReflectionObject($this->insight));
+                : new ReflectionObject($this->insight);
         } catch (ReflectionException $e) { // ignore because we know the class exists
             $reflection = null;
         }
@@ -132,7 +134,7 @@ class Insight
             }
         }
 
-        // otherwise pass the call on to the object itself
+        // otherwise, pass the call on to the object itself
         if (!$static) {
             $this->insight->{$name} = $value;
             return;
@@ -151,10 +153,11 @@ class Insight
     public function __call(string $name, array $args)
     {
         $static = is_string($this->insight);
+
         try { // try-catch to handle the exception for phpstan
-            $reflection = ($static
+            $reflection = $static
                 ? new ReflectionClass($this->insight)
-                : new ReflectionObject($this->insight));
+                : new ReflectionObject($this->insight);
         } catch (ReflectionException $e) { // ignore because we know the class exists
             $reflection = null;
         }
@@ -180,7 +183,7 @@ class Insight
             }
         }
 
-        // otherwise pass the call on to the parent
+        // otherwise, pass the call on to the parent
         if (!$static) {
             $callable = [$this->insight, $name];
             if (is_callable($callable)) {
