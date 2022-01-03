@@ -3,15 +3,13 @@ name: run-tests
 on:
   push:
   schedule:
-    - cron: '0 0 * * 0'
+    - cron: "0 0 * * 0"
 
 jobs:
   php-tests:
 
     name: PHP ${{ matrix.php }} - ${{ matrix.os }} - ${{ matrix.dependency-prefer }}
-
     runs-on: ${{ matrix.os }}
-
     strategy:
       fail-fast: true
       matrix:
@@ -24,19 +22,19 @@ jobs:
           - php: "8.0"
             phpunit: ^9.3
           - php: 7.4
-            phpunit: "^6.0 | ^7.0 | ^8.0 | ^9.0"
+            phpunit: ^9.0
           - php: 7.3
-            phpunit: "^6.0 | ^7.0 | ^8.0 | ^9.0"
+            phpunit: ^9.0
           - php: 7.2
-            phpunit: "^6.0 | ^7.0 | ^8.0 | ^9.0"
+            phpunit: ^8.0
           - php: 7.1
-            phpunit: "^6.0 | ^7.0 | ^8.0 | ^9.0"
+            phpunit: ^7.0
           - php: "7.0"
-            phpunit: "^6.0 | ^7.0 | ^8.0 | ^9.0"
+            phpunit: ^6.0
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -44,22 +42,22 @@ jobs:
           php-version: ${{ matrix.php }}
           coverage: none
 
-      # find out composer's cache directory on the current os - for the "Cache composer dependencies" step below
+      # find out composer's cache directory on the current os - for the "Cache dependencies (composer)" step below
       - name: Determine composer's cache directory
         id: composer-cache
         run: |
           echo "::set-output name=dir::$(composer config cache-files-dir)"
 
       - name: Cache dependencies (composer)
-        uses: actions/cache@v1
+        uses: actions/cache@v2
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
           key: php-${{ matrix.php }}-os-${{ matrix.os }}-dependency-prefer-${{ matrix.dependency-prefer }}-composer-${{ hashFiles('composer.json') }}
 
       - name: Install dependencies (composer)
         run: |
-          composer require "phpunit/phpunit:${{ matrix.phpunit }}" --no-interaction --no-update
-          composer update --${{ matrix.dependency-prefer }} --prefer-dist --no-interaction --no-suggest
+          composer require "phpunit/phpunit:${{ matrix.phpunit }}" --dev --no-interaction --no-update
+          composer update --${{ matrix.dependency-prefer }} --prefer-dist --no-interaction
 
       - name: Execute tests
         run: vendor/bin/phpunit
