@@ -1,8 +1,8 @@
 # Insight
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/code-distortion/insight.svg?style=flat-square)](https://packagist.org/packages/code-distortion/insight)
-![PHP Version](https://img.shields.io/badge/PHP-7.0%20to%208.1-blue?style=flat-square)
-[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/code-distortion/insight/run-tests?label=tests&style=flat-square)](https://github.com/code-distortion/insight/actions)
+![PHP Version](https://img.shields.io/badge/PHP-7.0%20to%208.2-blue?style=flat-square)
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/code-distortion/insight/run-tests.yml?branch=master&style=flat-square)](https://github.com/code-distortion/insight/actions)
 [![Buy The World a Tree](https://img.shields.io/badge/treeware-%F0%9F%8C%B3-lightgreen?style=flat-square)](https://plant.treeware.earth/code-distortion/insight)
 [![Contributor Covenant](https://img.shields.io/badge/contributor%20covenant-v2.0%20adopted-ff69b4.svg?style=flat-square)](code_of_conduct.md)
 
@@ -185,9 +185,3 @@ If you discover any security related issues, please email tim@code-distortion.ne
 ## License
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
-
-
-
-## PHP Package Boilerplate
-
-This package was generated using the [PHP Package Boilerplate](https://laravelpackageboilerplate.com).
