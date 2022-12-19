@@ -172,11 +172,12 @@ class InsightUnitTest extends TestCase
 
 
 
-        // test that method calling is passed to the $object if the method isn't found
+        // test that property access is passed to the $object
         $insight = new Insight(new SomeClassWithMagic());
         $this->assertSame('missingProp', $insight->missingProp);
-        $insight->missingProp = 'found';
-        $this->assertSame('found', $insight->missingProp);
+        $this->assertSame('I exist', $insight->existingProp);
+        $insight->existingProp = 'Yes I do';
+        $this->assertSame('Yes I do', $insight->existingProp);
     }
 
     /**

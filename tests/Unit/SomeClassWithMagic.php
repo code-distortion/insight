@@ -7,6 +7,9 @@ namespace CodeDistortion\Insight\Tests\Unit;
  */
 class SomeClassWithMagic
 {
+    /** @var string A property that exists. */
+    public $existingProp = 'I exist';
+
     /**
      * Handle property accesses when the property doesn't exist.
      *
