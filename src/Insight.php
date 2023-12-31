@@ -3,7 +3,6 @@
 namespace CodeDistortion\Insight;
 
 use CodeDistortion\Insight\Exceptions\InsightException;
-use phpDocumentor\Reflection\Types\Mixed_;
 use ReflectionClass;
 use ReflectionException;
 use ReflectionObject;
@@ -81,7 +80,9 @@ class Insight
             if ($prop) {
                 if ((!$static) || ($prop->isStatic() == $static)) {
                     $prop->setAccessible(true);
-                    $objectInstance = is_object($this->insight) ? $this->insight : null;
+                    $objectInstance = is_object($this->insight)
+                        ? $this->insight
+                        : null;
                     return $prop->getValue($objectInstance);
                 }
                 throw InsightException::propMustBeStatic($name);
@@ -125,9 +126,12 @@ class Insight
             }
 
             if ($prop) {
-                if ((!$static) || ($prop->isStatic() == $static)) {
+                if ((!$static) || ($prop->isStatic())) {
                     $prop->setAccessible(true);
-                    $prop->setValue($this->insight, $value);
+                    $objectInstance = is_object($this->insight)
+                        ? $this->insight
+                        : null;
+                    $prop->setValue($objectInstance, $value);
                     return;
                 }
                 throw InsightException::propMustBeStatic($name);
@@ -171,13 +175,13 @@ class Insight
             }
 
             if ($method) {
-                if ((!$static) || ($method->isStatic() == $static)) {
+                if ((!$static) || ($method->isStatic())) {
 
                     $method->setAccessible(true);
-                    return $method->invokeArgs(
-                        ($static ? null : $this->insight),
-                        $args
-                    );
+                    $objectInstance = is_object($this->insight)
+                        ? $this->insight
+                        : null;
+                    return $method->invokeArgs($objectInstance, $args);
                 }
                 throw InsightException::methodMustBeStatic($name);
             }

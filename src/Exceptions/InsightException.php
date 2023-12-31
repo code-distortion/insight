@@ -17,7 +17,7 @@ class InsightException extends Exception
      */
     public static function classDoesNotExist(string $name): self
     {
-        return new self('Class "' . $name . '" does not exist');
+        return new self("Class \"$name\" does not exist");
     }
 
     /**
@@ -28,7 +28,7 @@ class InsightException extends Exception
      */
     public static function invalidClassOrObject(string $name): self
     {
-        return new self('Invalid object or class "' . $name . '"');
+        return new self("Invalid object or class \"$name\"");
     }
 
     /**
@@ -39,20 +39,18 @@ class InsightException extends Exception
      */
     public static function propMustBeStatic(string $name): self
     {
-        return new self(
-            'Property "' . $name . '" must be static, or accessed from Insight based on an object instance'
-        );
+        return new self("Property \"$name\" must be static, or accessed from Insight based on an object instance");
     }
 
     /**
-     * Return a new instance when a property was accessed but it doesn't exist.
+     * Return a new instance when a property was accessed, but it doesn't exist.
      *
      * @param string $name The property that was accessed.
      * @return self
      */
     public static function staticPropertyDoesNotExist(string $name): self
     {
-        return new self('Static property "' . $name . '" does not exist');
+        return new self("Static property \"$name\" does not exist");
     }
 
     /**
@@ -63,17 +61,17 @@ class InsightException extends Exception
      */
     public static function methodMustBeStatic(string $name): self
     {
-        return new self('Method "' . $name . '" must be static, or called on Insight based on an object instance');
+        return new self("Method \"$name\" must be static, or called on Insight based on an object instance");
     }
 
     /**
-     * Return a new instance when a method was called but it doesn't exist.
+     * Return a new instance when a method was called, but it doesn't exist.
      *
      * @param string $name The method that does not exist.
      * @return self
      */
     public static function staticMethodDoesNotExist(string $name): self
     {
-        return new self('Method "' . $name . '" does not exist');
+        return new self("Method \"$name\" does not exist");
     }
 }
