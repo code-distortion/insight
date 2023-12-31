@@ -1,12 +1,10 @@
 # Insight
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/code-distortion/insight.svg?style=flat-square)](https://packagist.org/packages/code-distortion/insight)
-![PHP Version](https://img.shields.io/badge/PHP-7.0%20to%208.2-blue?style=flat-square)
+![PHP Version](https://img.shields.io/badge/PHP-7.0%20to%208.3-blue?style=flat-square)
 [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/code-distortion/insight/run-tests.yml?branch=master&style=flat-square)](https://github.com/code-distortion/insight/actions)
 [![Buy The World a Tree](https://img.shields.io/badge/treeware-%F0%9F%8C%B3-lightgreen?style=flat-square)](https://plant.treeware.earth/code-distortion/insight)
-[![Contributor Covenant](https://img.shields.io/badge/contributor%20covenant-v2.0%20adopted-ff69b4.svg?style=flat-square)](code_of_conduct.md)
-
-Sometimes you have a class you'd like to test and you want to get into more detail than just black-box-testing it's public methods.
+[![Contributor Covenant](https://img.shields.io/badge/contributor%20covenant-v2.1%20adopted-ff69b4.svg?style=flat-square)](.github/CODE_OF_CONDUCT.md)
 
 ***code-distortion/insight*** is a PHP library that allows you to access ***protected*** and ***private*** object methods and properties, as if they were ***public***.
 
@@ -17,11 +15,9 @@ $testObject = new Insight($myObject);
 $testObject->privateMethod(); // success
 ```
 
-There is [discussion](https://stackoverflow.com/questions/105007/should-i-test-private-methods-or-only-public-ones) on whether testing protected/private code is a good idea. For example, testing this way may give you better code-coverage but will also couple your tests to the internals of your classes, which may make refactoring more difficult.
+This might be useful when testing. [It might be a good idea, or it might not](https://stackoverflow.com/questions/105007/should-i-test-private-methods-or-only-public-ones). It's up to you.
 
-It's up to you where to draw the line. You might want to at least keep tests that use it separate from those that don't.
-
-> ***Note***: Using Insight for purposes other than testing might be a code smell.
+> ***Note***: Using Insight for purposes other than testing is probably a code smell.
 
 
 
@@ -48,7 +44,7 @@ $testObject = new Insight($myObject);
 $testObject = new Insight(new MyClass());
 ```
 
-$testObject will then act as if it ***is*** the original object, but gives you access to its protected and private methods and properties as well.
+`$testObject` will then act as if it ***is*** the original object, but gives you access to its protected and private methods and properties as well.
 
 Read and write protected and private properties:
 
@@ -95,7 +91,7 @@ $testObject = new Insight(MyClass::class);
 
 ### Static methods and properties
 
-PHP doesn't have *__getStatic()* or *__setStatic()* magic methods either which would help facilitate accessing protected properties.
+PHP doesn't have `__getStatic()` or `__setStatic()` magic methods either which would help facilitate accessing protected properties.
 
 Instead, Insight lets you access static methods and properties in the same way as regular methods and properties. Just add `StaticProp` or `StaticMethod` after the property or method name respectively:
 
@@ -117,7 +113,7 @@ Insight::{myClass::class}()->privateStaticMethod();
 
 ### Misc
 
-You can access the underlying object or class by accessing the *->insight* property:
+You can access the underlying object or class by accessing the `->insight` property:
 
 ``` php
 // when instantiated using an object
@@ -132,11 +128,11 @@ $testObject->insight; // === 'Namespace\To\MyClass'
 
 
 
-## Testing
+## Testing This Package
 
-``` bash
-composer test
-```
+- Clone this package: `git clone https://github.com/code-distortion/insight.git .`
+- Run `composer install` to install dependencies
+- Run the tests: `composer test`
 
 
 
@@ -148,25 +144,25 @@ Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed re
 
 ### SemVer
 
-This library uses [SemVer 2.0.0](https://semver.org/) versioning. This means that changes to `X` indicate a breaking change: `0.0.X`, `0.X.y`, `X.y.z`. When this library changes to version 1.0.0, 2.0.0 and so forth it doesn't indicate that it's necessarily a notable release, it simply indicates that the changes were breaking.
+This library uses [SemVer 2.0.0](https://semver.org/) versioning. This means that changes to `X` indicate a breaking change: `0.0.X`, `0.X.y`, `X.y.z`. When this library changes to version 1.0.0, 2.0.0 and so forth, it doesn't indicate that it's necessarily a notable release, it simply indicates that the changes were breaking.
 
 
 
 ## Treeware
 
-This package is [Treeware](https://treeware.earth). If you use it when building a production project, then we ask that you [**buy the world a tree**](https://plant.treeware.earth/code-distortion/insight) to thank us for our work. By contributing to the Treeware forest you’ll be creating employment for local families and restoring wildlife habitats.
+This package is [Treeware](https://treeware.earth). If you use it in production, then we ask that you [**buy the world a tree**](https://plant.treeware.earth/code-distortion/insight) to thank us for our work. By contributing to the Treeware forest you’ll be creating employment for local families and restoring wildlife habitats.
 
 
 
 ## Contributing
 
-Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
+Please see [CONTRIBUTING](.github/CONTRIBUTING.md) for details.
 
 
 
-### Code of conduct
+### Code of Conduct
 
-Please see [CODE_OF_CONDUCT](CODE_OF_CONDUCT.md) for details.
+Please see [CODE_OF_CONDUCT](.github/CODE_OF_CONDUCT.md) for details.
 
 
 
