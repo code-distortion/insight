@@ -1,11 +1,11 @@
 <?php
 
-namespace CodeDistortion\Insight\Tests\Unit;
+namespace CodeDistortion\Insight\Tests\Unit\Support;
 
 /**
  * An example testing class that is instantiated for Insight testing.
  */
-class SomeClassPrivateConstructor
+class SomeClass
 {
     /**
      * A public property.
@@ -56,10 +56,17 @@ class SomeClassPrivateConstructor
 
 
     /**
-     * SomeClassPrivateConstructor constructor.
+     * SomeClass constructor.
+     *
+     * @param string $publicProp    A value to store in the public property $public$rop.
+     * @param string $protectedProp A value to store in the public property $protectedProp$rop.
+     * @param string $privateProp   A value to store in the public property $privateProp.
      */
-    private function __construct()
+    public function __construct(string $publicProp, string $protectedProp, string $privateProp)
     {
+        $this->publicProp = $publicProp;
+        $this->protectedProp = $protectedProp;
+        $this->privateProp = $privateProp;
     }
 
     /**

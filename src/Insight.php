@@ -15,7 +15,7 @@ class Insight
     /**
      * The instance of the object to give access.
      *
-     * @var object|string
+     * @var object|class-string
      */
     public $insight;
 
@@ -60,16 +60,17 @@ class Insight
      */
     public function __get(string $name)
     {
-        $static = is_string($this->insight);
+        $insight = $this->insight;
+        $static = is_string($insight);
         try { // try-catch to handle the exception for phpstan
             $reflection = $static
-                ? new ReflectionClass($this->insight)
-                : new ReflectionObject($this->insight);
+                ? new ReflectionClass($insight)
+                : new ReflectionObject($insight);
         } catch (ReflectionException $e) { // ignore because we know the class exists
             $reflection = null;
         }
 
-        if (($reflection) && ($reflection->hasProperty($name))) {
+        if ((!is_null($reflection)) && ($reflection->hasProperty($name))) {
 
             try { // try-catch to handle the exception for phpstan
                 $prop = $reflection->getProperty($name);
@@ -77,11 +78,11 @@ class Insight
                 $prop = null;
             }
 
-            if ($prop) {
-                if ((!$static) || ($prop->isStatic() == $static)) {
+            if (!is_null($prop)) {
+                if ((!$static) || ($prop->isStatic() === $static)) {
                     $prop->setAccessible(true);
-                    $objectInstance = is_object($this->insight)
-                        ? $this->insight
+                    $objectInstance = is_object($insight)
+                        ? $insight
                         : null;
                     return $prop->getValue($objectInstance);
                 }
@@ -108,16 +109,17 @@ class Insight
      */
     public function __set(string $name, $value)
     {
-        $static = is_string($this->insight);
+        $insight = $this->insight;
+        $static = is_string($insight);
         try { // try-catch to handle the exception for phpstan
             $reflection = $static
-                ? new ReflectionClass($this->insight)
-                : new ReflectionObject($this->insight);
+                ? new ReflectionClass($insight)
+                : new ReflectionObject($insight);
         } catch (ReflectionException $e) { // ignore because we know the class exists
             $reflection = null;
         }
 
-        if (($reflection) && ($reflection->hasProperty($name))) {
+        if ((!is_null($reflection)) && ($reflection->hasProperty($name))) {
 
             try { // try-catch to handle the exception for phpstan
                 $prop = $reflection->getProperty($name);
@@ -125,11 +127,11 @@ class Insight
                 $prop = null;
             }
 
-            if ($prop) {
+            if (!is_null($prop)) {
                 if ((!$static) || ($prop->isStatic())) {
                     $prop->setAccessible(true);
-                    $objectInstance = is_object($this->insight)
-                        ? $this->insight
+                    $objectInstance = is_object($insight)
+                        ? $insight
                         : null;
                     $prop->setValue($objectInstance, $value);
                     return;
@@ -149,24 +151,25 @@ class Insight
     /**
      * Try to call the given method.
      *
-     * @param string $name The name of the method called.
-     * @param array  $args The arguments to pass to the method.
+     * @param string  $name The name of the method called.
+     * @param mixed[] $args The arguments to pass to the method.
      * @return mixed
      * @throws InsightException Thrown when the method does not exist or there was a problem calling it.
      */
     public function __call(string $name, array $args)
     {
-        $static = is_string($this->insight);
+        $insight = $this->insight;
+        $static = is_string($insight);
 
         try { // try-catch to handle the exception for phpstan
             $reflection = $static
-                ? new ReflectionClass($this->insight)
-                : new ReflectionObject($this->insight);
+                ? new ReflectionClass($insight)
+                : new ReflectionObject($insight);
         } catch (ReflectionException $e) { // ignore because we know the class exists
             $reflection = null;
         }
 
-        if (($reflection) && ($reflection->hasMethod($name))) {
+        if ((!is_null($reflection)) && ($reflection->hasMethod($name))) {
 
             try { // try-catch to handle the exception for phpstan
                 $method = $reflection->getMethod($name);
@@ -174,12 +177,12 @@ class Insight
                 $method = null;
             }
 
-            if ($method) {
+            if (!is_null($method)) {
                 if ((!$static) || ($method->isStatic())) {
 
                     $method->setAccessible(true);
-                    $objectInstance = is_object($this->insight)
-                        ? $this->insight
+                    $objectInstance = is_object($insight)
+                        ? $insight
                         : null;
                     return $method->invokeArgs($objectInstance, $args);
                 }
@@ -200,8 +203,8 @@ class Insight
     /**
      * Instantiate an Insight object based on the specified $class.
      *
-     * @param string $class The name of the method called (which is the class to assume).
-     * @param array  $args  The arguments to pass to the method.
+     * @param class-string $class The name of the method called (which is the class to assume).
+     * @param mixed[]      $args  The arguments to pass to the method.
      * @return mixed
      * @throws InsightException Thrown when the method does not exist or there was a problem calling it.
      */

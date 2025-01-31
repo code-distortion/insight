@@ -1,6 +1,6 @@
 <?php
 
-namespace CodeDistortion\Insight\Tests\Unit;
+namespace CodeDistortion\Insight\Tests\Unit\Support;
 
 /**
  * An example testing class that is instantiated for Insight testing.

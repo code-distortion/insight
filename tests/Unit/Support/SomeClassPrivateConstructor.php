@@ -1,11 +1,11 @@
 <?php
 
-namespace CodeDistortion\Insight\Tests\Unit;
+namespace CodeDistortion\Insight\Tests\Unit\Support;
 
 /**
  * An example testing class that is instantiated for Insight testing.
  */
-abstract class SomeClassAbstract
+class SomeClassPrivateConstructor
 {
     /**
      * A public property.
@@ -54,6 +54,13 @@ abstract class SomeClassAbstract
 
 
 
+
+    /**
+     * SomeClassPrivateConstructor constructor.
+     */
+    private function __construct()
+    {
+    }
 
     /**
      * Handle property accesses when the property doesn't exist.
