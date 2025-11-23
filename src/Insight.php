@@ -80,7 +80,9 @@ class Insight
 
             if (!is_null($prop)) {
                 if ((!$static) || ($prop->isStatic() === $static)) {
-                    $prop->setAccessible(true);
+                    if (PHP_VERSION_ID < 80500) {
+                        $prop->setAccessible(true);
+                    }
                     $objectInstance = is_object($insight)
                         ? $insight
                         : null;
@@ -129,7 +131,9 @@ class Insight
 
             if (!is_null($prop)) {
                 if ((!$static) || ($prop->isStatic())) {
-                    $prop->setAccessible(true);
+                    if (PHP_VERSION_ID < 80500) {
+                        $prop->setAccessible(true);
+                    }
                     $objectInstance = is_object($insight)
                         ? $insight
                         : null;
@@ -179,8 +183,9 @@ class Insight
 
             if (!is_null($method)) {
                 if ((!$static) || ($method->isStatic())) {
-
-                    $method->setAccessible(true);
+                    if (PHP_VERSION_ID < 80500) {
+                        $method->setAccessible(true);
+                    }
                     $objectInstance = is_object($insight)
                         ? $insight
                         : null;
